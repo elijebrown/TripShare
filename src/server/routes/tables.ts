@@ -14,7 +14,7 @@ import type {
 
 const tripIdQuery = validator('query', (value) => {
 	const raw = Array.isArray(value.tripId) ? value.tripId[0] : value.tripId
-	if (typeof raw !== 'string' || !/^\d+$/.test(raw)) {
+	if (typeof raw !== 'string' || !/^[1-9]\d*$/.test(raw)) {
 		throw new HTTPException(400, {
 			message: 'tripId must be a positive integer',
 		})
