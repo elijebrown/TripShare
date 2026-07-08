@@ -18,6 +18,9 @@ export const SearchAnything = ({ size }: props) => {
             return
         }
         const res = await api.searchAll.$get({ query: { search: value } })
+        if (!res.ok) {
+            return
+        }
         const searchResults = await res.json()
         if (latestQuery.current !== value) {
             return

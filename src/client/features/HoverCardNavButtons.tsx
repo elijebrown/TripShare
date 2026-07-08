@@ -10,12 +10,24 @@ export const HoverCardNavButtons = () => {
 
     const trips = useQuery({
         queryKey: ['trips'],
-        queryFn: async () => (await api.trips.$get()).json(),
+        queryFn: async () => {
+            const res = await api.trips.$get()
+            if (!res.ok) {
+                throw new Error(`Failed to load trips (${res.status})`)
+            }
+            return res.json()
+        },
     })
 
     const memories = useQuery({
         queryKey: ['memories'],
-        queryFn: async () => (await api.memories.$get()).json(),
+        queryFn: async () => {
+            const res = await api.memories.$get()
+            if (!res.ok) {
+                throw new Error(`Failed to load memories (${res.status})`)
+            }
+            return res.json()
+        },
     })
 
     useEffect(() => {
