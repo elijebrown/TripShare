@@ -1,5 +1,5 @@
 node_modules
+dist
 .env
-photos/small
-photos/thumbnail
 .env.local
+.DS_Store
