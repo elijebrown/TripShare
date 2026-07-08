@@ -1,9 +1,0 @@
-FROM node:latest
-
-WORKDIR /app
-
-COPY packages/back-express .
-
-RUN npm install
-
-CMD ["npx", "nodemon"]
