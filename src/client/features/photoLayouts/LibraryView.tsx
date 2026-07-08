@@ -13,12 +13,7 @@ export const LibraryView = ({ photos }: props) => {
     })
 
     return (
-        <Flex
-            justify="center"
-            display="flex"
-            wrap="wrap"
-            p="12px"
-        >
+        <Flex justify="center" display="flex" wrap="wrap" p="12px">
             {photos.map((value) => {
                 const cldImg = cloudinary
                     .image(value.photoFilepath)
@@ -33,7 +28,11 @@ export const LibraryView = ({ photos }: props) => {
                     <img
                         key={value.photoFilepath}
                         src={cldImg}
-                        style={{ maxHeight: '160px', maxWidth: '160px', border: '2px solid black'}}
+                        style={{
+                            maxHeight: '160px',
+                            maxWidth: '160px',
+                            border: '2px solid black',
+                        }}
                     />
                 )
             })}

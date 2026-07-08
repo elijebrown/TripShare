@@ -13,22 +13,26 @@ export const CarouselView = ({ photos }: props) => {
     })
 
     return (
-        <Carousel slideSize={'fit-content'} dragFree slideGap={'md'} loop align={'start'}>
+        <Carousel
+            slideSize={'fit-content'}
+            dragFree
+            slideGap={'md'}
+            loop
+            align={'start'}
+        >
             {photos.map((value) => {
                 const cldImg = cloudinary
                     .image(value.photoFilepath)
                     .format('auto')
                     .quality('auto')
-                    .resize(
-                        fit(1200,1200)
-                    )
+                    .resize(fit(1200, 1200))
                     .toURL()
 
                 return (
                     <Carousel.Slide key={value.photoFilepath}>
                         <Image
                             src={cldImg}
-                            style={{ maxHeight: '500px', minWidth: 'auto'}}
+                            style={{ maxHeight: '500px', minWidth: 'auto' }}
                         />
                     </Carousel.Slide>
                 )
