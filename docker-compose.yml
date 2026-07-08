@@ -1,61 +1,16 @@
 services:
-  back-express:
-    container_name: back-express
-    build:
-      context: .
-      dockerfile: Dockerfile.back-express
-    ports:
-      - "3000:3000"
-    networks:
-      - app-network
-    working_dir: /app
-    develop:
-      watch:
-        - action: sync
-          path: ./packages/back-express
-          target: /app/
-          ignore:
-            - node_modules/
-        - action: rebuild
-          path: ./packages/back-express/package.json
-
-  front-react:
-    container_name: front-react
-    networks:
-      - app-network
-    build:
-      context: .
-      dockerfile: Dockerfile.front-react
-    ports: 
-      - "5173:5173"
-    working_dir: /app
-    develop:
-      watch:
-        - action: rebuild
-          path: ./packages/front-react/package.json
-        - action: sync
-          path: ./packages/front-react
-          target: /app
-          ignore:
-            - node_modules/
-
   database:
     image: paradedb/paradedb:latest
     container_name: database
-    networks:
-      - app-network
     environment:
-      POSTGRES_USER: "pablo_escobar_gaviria"
-      POSTGRES_PASSWORD: "APyRnWxbJu7JB#"
-      POSTGRES_DB: "narcos"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
     ports:
       - "5433:5432"
     volumes:
-      - photo-db:/var/lib/postgresql  # Mount the volume for the database data
+      - photo-db:/var/lib/postgresql
 
 volumes:
-  photo-db:   
+  photo-db:
     external: true
-networks:
-  app-network:
-    driver: bridge
