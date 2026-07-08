@@ -13,7 +13,7 @@ JOIN photos p ON p.city_id = c.id
 WHERE c.city_name @@@ paradedb.match('city_name', $1)
 ORDER BY score DESC
 LIMIT 3
-`
+`;
 
 export const provinceSearch = `
  SELECT DISTINCT provinces.province_name, provinces.id, paradedb.score(provinces.id) AS score
@@ -23,7 +23,7 @@ JOIN photos ON photos.city_id = c.id
 WHERE provinces.province_name @@@ paradedb.match('province_name', $1)
 ORDER BY score DESC
 LIMIT 3
-`
+`;
 
 export const countrySearch = `
     SELECT DISTINCT co.id, country_id, co.country_name, paradedb.score(co.id) AS score
@@ -34,7 +34,7 @@ JOIN photos ph ON c.id = ph.city_id
 WHERE co.country_name @@@ paradedb.match('country_name', $1)
 ORDER BY score DESC
 LIMIT 3
-`
+`;
 
 export const tripSearch = `
     SELECT DISTINCT t.id, t.trip_name, t.trip_date, t.trip_text, paradedb.score(t.id) AS score
@@ -42,7 +42,7 @@ FROM trips t
 WHERE t.trip_name @@@ paradedb.match('trip_name', $1)
     ORDER BY score DESC
     LIMIT 1
-`
+`;
 
 export const memorySearch = `
     SELECT DISTINCT m.id, m.trip_id, m.memory_title, m.memory_text, paradedb.score(m.id) AS score
@@ -50,14 +50,14 @@ FROM memories m
 WHERE m.memory_title @@@ paradedb.match('memory_title', $1)
 ORDER BY score DESC
 LIMIT 3
-`
+`;
 
 export const tripPhotos = `
     WITH photo_ids AS (
         SELECT photo_id FROM trip_photos WHERE trip_id = $1
     )
     SELECT p.* FROM photos p JOIN photo_ids i ON p.id = i.photo_id
-`
+`;
 
 export const searchAll = `
   WITH
@@ -132,13 +132,13 @@ SELECT * FROM trip_similarity
 UNION ALL
 SELECT * FROM memory_similarity
 ORDER BY score DESC
-`
+`;
 
 // Explicit getter queries (replaces the runtime information_schema route
 // generation from the old fetchTableNames.ts).
-export const allTrips = `SELECT * FROM trips`
-export const allMemories = `SELECT * FROM memories`
-export const allPhotos = `SELECT * FROM photos`
-export const allCities = `SELECT * FROM cities`
-export const allProvinces = `SELECT * FROM provinces`
-export const allCountries = `SELECT * FROM countries`
+export const allTrips = `SELECT * FROM trips`;
+export const allMemories = `SELECT * FROM memories`;
+export const allPhotos = `SELECT * FROM photos`;
+export const allCities = `SELECT * FROM cities`;
+export const allProvinces = `SELECT * FROM provinces`;
+export const allCountries = `SELECT * FROM countries`;

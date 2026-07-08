@@ -1,16 +1,16 @@
 services:
-    database:
-        image: paradedb/paradedb:latest
-        container_name: database
-        environment:
-            POSTGRES_USER: ${POSTGRES_USER}
-            POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-            POSTGRES_DB: ${POSTGRES_DB}
-        ports:
-            - '5433:5432'
-        volumes:
-            - photo-db:/var/lib/postgresql
+  database:
+    image: paradedb/paradedb:latest
+    container_name: database
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    ports:
+      - '5433:5432'
+    volumes:
+      - photo-db:/var/lib/postgresql
 
 volumes:
-    photo-db:
-        external: true
+  photo-db:
+    external: true
