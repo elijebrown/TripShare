@@ -1,5 +1,5 @@
-import { Button, TextInput, Grid } from '@mantine/core'
-import { defSpacing } from '../types-constants/constants'
+import { Button, Grid } from '@mantine/core'
+import { defSpacing } from '../constants'
 import { HoverCardNavButtons } from '../features/HoverCardNavButtons'
 import { useNavigate } from 'react-router'
 import { SearchAnything } from '../features/searchAnything/SearchAnything'

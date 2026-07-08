@@ -4,11 +4,9 @@ import './styles/index.css'
 import App from './components/App.tsx'
 import { createBrowserRouter, RouterProvider } from 'react-router'
 import { Trip } from './components/Trip.tsx'
-import { genericLoaderFunction } from './async/genericLoaderFunction.ts'
 import { Photos } from './components/Photos.tsx'
+import { photosLoader, tripPhotosLoader } from './api/loaders.ts'
 
-const tripsLoader = genericLoaderFunction('tripPhotos', 'tripId')
-const photosLoader = genericLoaderFunction('photos')
 const router = createBrowserRouter([
     {
         path: '/',
@@ -24,7 +22,7 @@ const router = createBrowserRouter([
                     {
                         path: ':tripId',
                         element: <Trip />,
-                        loader: tripsLoader,
+                        loader: tripPhotosLoader,
                     },
                 ],
             },
@@ -37,7 +35,7 @@ const router = createBrowserRouter([
                     },
                     {
                         path: ':memoriesid',
-                        element: <h1>23432rgsd</h1>,
+                        element: <h1>Memory detail — not built yet</h1>,
                     },
                 ],
             },

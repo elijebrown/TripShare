@@ -1,13 +1,13 @@
 import { create } from 'zustand'
-import { memoriesType, tripsType } from '../types-constants/types'
+import type { Memory, Trip } from '../../shared/types'
 
 type viewType = 'carousel' | 'quad' | 'compact' | 'library'
 type imageQuality = 'best' | 'high' | 'low'
 type storeState = {
     view: viewType
     quality: imageQuality
-    tripsData: tripsType[]
-    memoriesData: memoriesType[]
+    tripsData: Trip[]
+    memoriesData: Memory[]
 }
 
 type storeAction = {
@@ -18,7 +18,7 @@ type storeAction = {
 
 type storeType = storeState & storeAction
 
-export const useStore = create<storeType>()((set, get) => ({
+export const useStore = create<storeType>()((set) => ({
     view: 'carousel',
     quality: 'high',
     tripsData: [],
@@ -27,10 +27,3 @@ export const useStore = create<storeType>()((set, get) => ({
         setView: (view) => set({ view }),
     },
 }))
-
-// const useStore = create((set) => ({
-//   bears: 0,
-//   increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-//   removeAllBears: () => set({ bears: 0 }),
-//   updateBears: (newBears) => set({ bears: newBears }),
-// }))

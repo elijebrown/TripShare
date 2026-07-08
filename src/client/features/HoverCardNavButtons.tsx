@@ -1,29 +1,34 @@
 import { Button, HoverCard, Stack } from '@mantine/core'
 import { useQuery } from '@tanstack/react-query'
-import { memoriesType, tripsType } from '../types-constants/types'
 import { useNavigate } from 'react-router'
-import { fetch } from '../async/fetch'
+import { useEffect } from 'react'
+import { api } from '../api/client'
 import { useStore } from '../state/store'
 
 export const HoverCardNavButtons = () => {
     const navigate = useNavigate()
 
     const trips = useQuery({
-        queryKey: ['tripNames'],
-        queryFn: () => fetch<tripsType[]>('trips'),
+        queryKey: ['trips'],
+        queryFn: async () => (await api.trips.$get()).json(),
     })
 
     const memories = useQuery({
-        queryKey: ['memoryNames'],
-        queryFn: () => fetch<memoriesType[]>('memories'),
+        queryKey: ['memories'],
+        queryFn: async () => (await api.memories.$get()).json(),
     })
 
-    if (trips.data){
-      useStore.setState({tripsData: trips.data})
-    }
-    if (memories.data){
-      useStore.setState({memoriesData: memories.data})
-    }
+    useEffect(() => {
+        if (trips.data) {
+            useStore.setState({ tripsData: trips.data })
+        }
+    }, [trips.data])
+
+    useEffect(() => {
+        if (memories.data) {
+            useStore.setState({ memoriesData: memories.data })
+        }
+    }, [memories.data])
 
     return (
         <>
@@ -40,12 +45,12 @@ export const HoverCardNavButtons = () => {
                 </HoverCard.Target>
                 <HoverCard.Dropdown p={0}>
                     <Stack gap={0}>
-                        {trips.data?.map((val, index) => (
+                        {trips.data?.map((val) => (
                             <Button
                                 color="gray"
                                 radius={0}
                                 variant="subtle"
-                                key={index}
+                                key={val.id}
                                 onClick={() => {
                                     navigate(`trips/${val.id}`)
                                 }}
@@ -69,17 +74,17 @@ export const HoverCardNavButtons = () => {
                 </HoverCard.Target>
                 <HoverCard.Dropdown p={0}>
                     <Stack gap={0}>
-                        {memories.data?.map((val, index) => (
+                        {memories.data?.map((val) => (
                             <Button
                                 color="gray"
                                 radius={0}
                                 variant="subtle"
-                                key={index}
+                                key={val.id}
                                 onClick={() => {
                                     navigate(`memories/${val.id}`)
                                 }}
                             >
-                                {val.memoryName}
+                                {val.memoryTitle}
                             </Button>
                         ))}
                     </Stack>

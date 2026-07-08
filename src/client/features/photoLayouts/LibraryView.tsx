@@ -1,10 +1,10 @@
 import { Flex } from '@mantine/core'
-import { photosType } from '../../types-constants/types'
+import type { Photo } from '../../../shared/types'
 import { Cloudinary } from '@cloudinary/url-gen/index'
-import { crop, fit, imaggaCrop, fill } from '@cloudinary/url-gen/actions/resize'
+import { fill } from '@cloudinary/url-gen/actions/resize'
 import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity'
 
-type props = { photos: photosType[] }
+type props = { photos: Photo[] }
 export const LibraryView = ({ photos }: props) => {
     const cloudinary = new Cloudinary({
         cloud: {

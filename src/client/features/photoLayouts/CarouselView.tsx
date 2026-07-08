@@ -1,11 +1,10 @@
-import { photosType } from '../../types-constants/types'
+import type { Photo } from '../../../shared/types'
 import { Cloudinary } from '@cloudinary/url-gen/index'
-import { fill, fit, scale } from '@cloudinary/url-gen/actions/resize'
-import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity'
+import { fit } from '@cloudinary/url-gen/actions/resize'
 import { Carousel } from '@mantine/carousel'
 import { Image } from '@mantine/core'
 
-type props = { photos: photosType[] }
+type props = { photos: Photo[] }
 export const CarouselView = ({ photos }: props) => {
     const cloudinary = new Cloudinary({
         cloud: {
