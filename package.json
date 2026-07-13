@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently -n server,client -c blue,green \"bun run dev:server\" \"bun run dev:client\"",
+    "dev": "concurrently --kill-others -n server,client -c blue,green \"bun run dev:server\" \"bun run dev:client\"",
     "dev:server": "bun --watch src/server/index.ts",
     "dev:client": "vite",
     "build": "tsc -b && vite build",
