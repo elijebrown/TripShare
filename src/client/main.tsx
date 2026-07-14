@@ -6,12 +6,17 @@ import { createBrowserRouter, RouterProvider } from 'react-router';
 import { Trip } from './components/Trip.tsx';
 import { Photos } from './components/Photos.tsx';
 import { photosLoader, tripPhotosLoader } from './api/loaders.ts';
+import Home from './components/Home.tsx';
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
     children: [
+      {
+        index: true,
+        element: <Home />,
+      },
       {
         path: 'trips/',
         children: [
