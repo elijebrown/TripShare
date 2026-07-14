@@ -1,8 +1,6 @@
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { useQuery } from '@tanstack/react-query';
 import { api } from '@/api/client';
-import { useStore } from '@/state/store';
 import { SearchAnything } from '@/features/searchAnything/SearchAnything';
 import {
   NavigationMenu,
@@ -32,13 +30,6 @@ export const Navbar = () => {
       return res.json();
     },
   });
-
-  useEffect(() => {
-    if (trips.data) useStore.setState({ tripsData: trips.data });
-  }, [trips.data]);
-  useEffect(() => {
-    if (memories.data) useStore.setState({ memoriesData: memories.data });
-  }, [memories.data]);
 
   return (
     <header className="sticky top-0 z-20 flex items-center gap-5 border-b-[2.5px] border-foreground bg-background px-6 py-3">

@@ -7,7 +7,7 @@ export const CarouselView = ({ photos }: { photos: Photo[] }) => {
     <Carousel opts={{ dragFree: true, loop: true, align: 'start' }} className="mx-6 mt-4">
       <CarouselContent>
         {photos.map((value) => (
-          <CarouselItem key={value.photoFilepath} className="basis-auto">
+          <CarouselItem key={value.id} className="basis-auto">
             <img
               src={fitUrl(value.photoFilepath, 1200)}
               alt={value.caption ?? ''}
