@@ -14,9 +14,6 @@
   },
   "dependencies": {
     "@cloudinary/url-gen": "^1.21.0",
-    "@mantine/carousel": "^7.15.2",
-    "@mantine/core": "^7.15.2",
-    "@mantine/hooks": "^7.15.2",
     "@radix-ui/react-dialog": "^1.1.19",
     "@radix-ui/react-navigation-menu": "^1.2.18",
     "@radix-ui/react-popover": "^1.1.19",
@@ -55,8 +52,6 @@
     "globals": "^15.14.0",
     "jsdom": "^29.1.1",
     "postcss": "^8.4.49",
-    "postcss-preset-mantine": "^1.17.0",
-    "postcss-simple-vars": "^7.0.1",
     "prettier": "3.4.2",
     "tailwindcss": "^4.3.2",
     "typescript": "~5.7.2",
