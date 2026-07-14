@@ -1,39 +1,17 @@
-import { Flex } from '@mantine/core';
 import type { Photo } from '../../../shared/types';
-import { Cloudinary } from '@cloudinary/url-gen/index';
-import { fill } from '@cloudinary/url-gen/actions/resize';
-import { autoGravity } from '@cloudinary/url-gen/qualifiers/gravity';
+import { fillUrl } from '@/lib/cloudinary';
 
-type props = { photos: Photo[] };
-export const LibraryView = ({ photos }: props) => {
-  const cloudinary = new Cloudinary({
-    cloud: {
-      cloudName: 'dchwbmloi',
-    },
-  });
-
+export const LibraryView = ({ photos }: { photos: Photo[] }) => {
   return (
-    <Flex justify="center" display="flex" wrap="wrap" p="12px">
-      {photos.map((value) => {
-        const cldImg = cloudinary
-          .image(value.photoFilepath)
-          .format('auto')
-          .quality('auto')
-          .resize(fill().width(320).height(320).gravity(autoGravity()))
-          .toURL();
-
-        return (
-          <img
-            key={value.photoFilepath}
-            src={cldImg}
-            style={{
-              maxHeight: '160px',
-              maxWidth: '160px',
-              border: '2px solid black',
-            }}
-          />
-        );
-      })}
-    </Flex>
+    <div className="flex flex-wrap justify-center gap-3 p-3">
+      {photos.map((value) => (
+        <img
+          key={value.id}
+          src={fillUrl(value.photoFilepath, 320, 320)}
+          alt={value.caption ?? ''}
+          className="h-40 w-40 rounded-[14px_10px_12px_11px] border-[2.5px] border-foreground object-cover"
+        />
+      ))}
+    </div>
   );
 };
