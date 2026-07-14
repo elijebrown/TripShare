@@ -1,42 +1,21 @@
 import type { Photo } from '../../../shared/types';
-import { Cloudinary } from '@cloudinary/url-gen/index';
-import { fit } from '@cloudinary/url-gen/actions/resize';
-import { Carousel } from '@mantine/carousel';
-import { Image } from '@mantine/core';
+import { fitUrl } from '@/lib/cloudinary';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 
-type props = { photos: Photo[] };
-export const CarouselView = ({ photos }: props) => {
-  const cloudinary = new Cloudinary({
-    cloud: {
-      cloudName: 'dchwbmloi',
-    },
-  });
-
+export const CarouselView = ({ photos }: { photos: Photo[] }) => {
   return (
-    <Carousel
-      slideSize={'fit-content'}
-      dragFree
-      slideGap={'md'}
-      loop
-      align={'start'}
-    >
-      {photos.map((value) => {
-        const cldImg = cloudinary
-          .image(value.photoFilepath)
-          .format('auto')
-          .quality('auto')
-          .resize(fit(1200, 1200))
-          .toURL();
-
-        return (
-          <Carousel.Slide key={value.photoFilepath}>
-            <Image
-              src={cldImg}
-              style={{ maxHeight: '500px', minWidth: 'auto' }}
+    <Carousel opts={{ dragFree: true, loop: true, align: 'start' }} className="mx-6 mt-4">
+      <CarouselContent>
+        {photos.map((value) => (
+          <CarouselItem key={value.photoFilepath} className="basis-auto">
+            <img
+              src={fitUrl(value.photoFilepath, 1200)}
+              alt={value.caption ?? ''}
+              className="max-h-[500px] rounded-[18px_14px_20px_12px] border-[2.5px] border-foreground object-contain"
             />
-          </Carousel.Slide>
-        );
-      })}
+          </CarouselItem>
+        ))}
+      </CarouselContent>
     </Carousel>
   );
 };
