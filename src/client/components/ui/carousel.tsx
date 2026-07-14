@@ -66,13 +66,9 @@ const Carousel = React.forwardRef<
     const [canScrollPrev, setCanScrollPrev] = React.useState(false)
     const [canScrollNext, setCanScrollNext] = React.useState(false)
 
-    const onSelect = React.useCallback((api: CarouselApi) => {
-      if (!api) {
-        return
-      }
-
-      setCanScrollPrev(api.canScrollPrev())
-      setCanScrollNext(api.canScrollNext())
+    const onSelect = React.useCallback((emblaApi: NonNullable<CarouselApi>) => {
+      setCanScrollPrev(emblaApi.canScrollPrev())
+      setCanScrollNext(emblaApi.canScrollNext())
     }, [])
 
     const scrollPrev = React.useCallback(() => {
@@ -110,14 +106,11 @@ const Carousel = React.forwardRef<
       }
 
       onSelect(api)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      api.on("reInit", onSelect as any)
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      api.on("select", onSelect as any)
+      api.on("reInit", onSelect)
+      api.on("select", onSelect)
 
       return () => {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        api?.off("select", onSelect as any)
+        api?.off("select", onSelect)
       }
     }, [api, onSelect])
 
